@@ -9,7 +9,7 @@ import java.io.Serializable;
  * 响应对象
  */
 @Data
-public class WeatherResponse implements Serializable{
+public class WeatherResponse implements Serializable {
     private static final long serialVersionUID = 1L;
 
     private Weather data;

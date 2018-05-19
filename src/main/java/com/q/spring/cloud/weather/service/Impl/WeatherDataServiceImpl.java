@@ -13,7 +13,7 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
 @Service
-public class WeatherDataServiceImpl implements WeatherDataService{
+public class WeatherDataServiceImpl implements WeatherDataService {
 
     private static final String WEATHER_URI = "http://wthrcdn.etouch.cn/weather_mini?";
 
@@ -32,23 +32,23 @@ public class WeatherDataServiceImpl implements WeatherDataService{
         return this.doGetWeather(uri);
     }
 
-    private WeatherResponse doGetWeather(String uri){
+    private WeatherResponse doGetWeather(String uri) {
 
         ObjectMapper mapper = new ObjectMapper();
         WeatherResponse weatherResponse = null;
         String strBody = null;
 
-            try {
-                //调用工具方法讲返回的数据解压并处理成字符串
-                strBody = WeatherTool.getWeather(uri);
-            } catch (UnsupportedEncodingException e) {
-                e.printStackTrace();
-            }
+        try {
+            //调用工具方法讲返回的数据解压并处理成字符串
+            strBody = WeatherTool.getWeather(uri);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
 
-        try{
-                //将字符串转换成对象
-            weatherResponse = mapper.readValue(strBody,WeatherResponse.class);
-        }catch (IOException e){
+        try {
+            //将字符串转换成对象
+            weatherResponse = mapper.readValue(strBody, WeatherResponse.class);
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return weatherResponse;

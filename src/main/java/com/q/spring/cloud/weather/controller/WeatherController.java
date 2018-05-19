@@ -17,12 +17,12 @@ public class WeatherController {
 
 
     @GetMapping("/cityId/{cityId}")
-    public WeatherResponse getWeatherByCityId(@PathVariable("cityId") String cityId){
+    public WeatherResponse getWeatherByCityId(@PathVariable("cityId") String cityId) {
         return weatherDataService.getDataByCityId(cityId);
     }
 
     @GetMapping("/cityName/{cityName}")
-    public WeatherResponse getWeatherByCityName(@PathVariable("cityName") String cityName){
+    public WeatherResponse getWeatherByCityName(@PathVariable("cityName") String cityName) {
         return weatherDataService.getDataBycityName(cityName);
     }
 }
