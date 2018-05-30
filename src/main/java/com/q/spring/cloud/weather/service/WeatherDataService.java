@@ -19,4 +19,10 @@ public interface WeatherDataService {
      * @return
      */
     WeatherResponse getDataBycityName(String cityName);
+
+    /**
+     * 根据城市id同步天气
+     * @param cityId
+     */
+    void syncDateByCityId(String cityId);
 }

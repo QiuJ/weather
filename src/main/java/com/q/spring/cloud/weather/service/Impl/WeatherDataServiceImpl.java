@@ -77,4 +77,32 @@ public class WeatherDataServiceImpl implements WeatherDataService {
         }
         return weatherResponse;
     }
+
+
+    @Override
+    public void syncDateByCityId(String cityId) {
+        String uri = WEATHER_URI + "citykey=" + cityId;
+        this.saveWeatherData(uri);
+    }
+
+    /**
+     * 把天气数据放入缓存
+     * @param uri
+     */
+    private void saveWeatherData(String uri){
+        String key = uri;
+        String strBody = null;
+        ValueOperations<String, String> ops = stringRedisTemplate.opsForValue();
+
+        //缓存没有,在调用服务接口来获取
+        try {
+            //调用工具方法讲返回的数据解压并处理成字符串
+            logger.info("Redis don't has data");
+            strBody = WeatherTool.getWeather(uri);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
+        //数据写入缓存
+        ops.set(key, strBody, TIME_OUT, TimeUnit.SECONDS);
+    }
 }
